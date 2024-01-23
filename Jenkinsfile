@@ -15,7 +15,7 @@ pipeline {
         stage('Build') { 
             steps { 
                 script{
-                 app = docker.build("underwater")
+                 app = docker.build("twinco")
                 }
             }
         }
@@ -27,7 +27,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script{
-                        docker.withRegistry('https://618959785907.dkr.ecr.eu-west-1.amazonaws.com/twinco', 'ecr:eu-west-1:aws-credential-raul-temp') {
+                        docker.withRegistry('https://618959785907.dkr.ecr.eu-west-1.amazonaws.com', 'ecr:eu-west-1:aws-credential-raul-temp') {
                     app.push("${env.BUILD_NUMBER}")
                     app.push("latest")
                     }
